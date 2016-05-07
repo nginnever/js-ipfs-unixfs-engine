@@ -52,13 +52,12 @@ function exporter (hash, dagService, options, callback) {
         rs.push(unmarshaledData.data)
         rs.push(null)
       }
-      ee.emit('file', { stream: rs, path: name, dir: dir })
+      ee.emit('file', { stream: rs, path: name })
       if (callback) {
         callback()
       }
       return
     } else {
-      ee.emit('file', { stream: rs, path: name, dir: dir })
       init = false
       rs._read = () => {
         if (init) {
@@ -88,6 +87,7 @@ function exporter (hash, dagService, options, callback) {
           return
         })
       }
+      ee.emit('file', { stream: rs, path: name })
     }
   }
 
